@@ -4,7 +4,6 @@
  *   Product (select), Customer (AutocompleteDropdown), DC (AutocompleteDropdown),
  *   Effective At, Amount
  *
- * Key production patterns demonstrated:
  *  - AutocompleteItem state: { id, display } objects stored, .display extracted on save
  *  - DistributionCenterDropdown keyed on customer.id so it resets when customer changes
  */

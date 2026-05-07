@@ -10,7 +10,6 @@ interface PageToolbarProps {
 /**
  * Standard single-row toolbar used below the PageHeader on list/table pages.
  * Provides the beige background, bottom border, horizontal padding, and
- * min-height consistent across production pages.
  */
 export const PageToolbar: React.FC<PageToolbarProps> = ({ children, sx }) => (
   <Box

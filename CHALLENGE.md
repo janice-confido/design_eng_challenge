@@ -6,7 +6,8 @@
 
 Design and implement an interface for a user to **view and manage a list of products and
 their associated prices**. Prices change over time, so the UI must account for scheduling
-price changes that take effect on a specific future date.
+price changes that take effect on a specific future date. Reference Figma Designs (TODO: 
+add link) for our visual design language and early-stage designs for this page. 
 
 This repo gives you a **working but rough starting point**: the Supabase backend is live,
 the core CRUD flows work, and the stack matches what we use in production. 

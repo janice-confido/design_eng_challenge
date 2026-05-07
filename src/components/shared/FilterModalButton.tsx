@@ -1,11 +1,8 @@
 /**
- * FilterModalButton — opens a filter dialog matching the production FilterModal.
  *
  *
- * Key production patterns reproduced:
  *  - Modal title "Filters" (or custom) with absolute X close button
  *  - Each field: Typography label ABOVE the input (not floating label)
- *  - Autocomplete Select with "Select..." placeholder (mirrors SelectField)
  *  - Date input for date-type fields
  *  - "Apply Filters" primary button, "Cancel" secondary button
  *  - Width ≈ 40vw
@@ -88,7 +85,6 @@ export const FilterModalButton = <F extends Record<string, string | undefined>>(
         fullWidth
         PaperProps={{ sx: { width: '40vw', maxWidth: '600px' } }}
       >
-        {/* Title — matches production Modal: Typography h6 + absolute close button */}
         <DialogTitle sx={{ pr: 6 }}>
           <Typography component="div" variant="h6" sx={{ fontWeight: 500 }}>
             {title}
@@ -102,7 +98,6 @@ export const FilterModalButton = <F extends Record<string, string | undefined>>(
           </IconButton>
         </DialogTitle>
 
-        {/* Content — label above input, matching production Grid container spacing={2} */}
         <DialogContent>
           <Grid container spacing={0}>
             {fields.map((field) => {
@@ -115,7 +110,6 @@ export const FilterModalButton = <F extends Record<string, string | undefined>>(
 
               return (
                 <Grid item xs={12} sx={{ mb: 3 }} key={field.key}>
-                  {/* Label above — matches production Typography sx={{ fontSize: 14 }} color="text.secondary" */}
                   <Typography
                     sx={{ fontSize: 14, mb: 0.75 }}
                     color="text.secondary"
@@ -158,7 +152,6 @@ export const FilterModalButton = <F extends Record<string, string | undefined>>(
           </Grid>
         </DialogContent>
 
-        {/* Actions — matches production: secondary="Cancel" primary="Apply Filters" */}
         <DialogActions sx={{ px: 3, pb: 2 }}>
           <Button variant="outlined" onClick={handleClose}>
             Cancel

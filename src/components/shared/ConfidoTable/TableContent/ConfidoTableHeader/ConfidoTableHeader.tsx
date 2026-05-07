@@ -30,7 +30,6 @@ export const ConfidoTableHeader = <R extends ValidRowModel>({
         ) : (
           <TableCell key={col.field} sx={constructColumnStyle(col.style, col.pinned, true)}>
             {col.renderHeader?.({ field: col.field }) ?? (
-              /* tableHeaderStyle = { fontWeight: 500 } — matches production Products.tsx */
               <Typography sx={{ fontWeight: 500 }} component="span">
                 {col.headerName}
               </Typography>

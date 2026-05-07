@@ -1,10 +1,7 @@
 /**
  * api/products.ts
  *
- * Follows the same apiService export pattern as Confido's production frontend
- * (see web/src/components/Products/api.ts in the main repo).
  *
- * Table name: products
 
  */
 import { supabase } from '../supabase'
@@ -107,7 +104,6 @@ const updateProduct = async (id: number, values: ProductFormValues): Promise<Pro
 
 /**
  * Soft-delete a product (sets is_deleted = true).
- * Mirrors the production pattern — hard deletes are avoided in Confido.
  */
 const deleteProduct = async (id: number): Promise<void> => {
   const { error } = await supabase

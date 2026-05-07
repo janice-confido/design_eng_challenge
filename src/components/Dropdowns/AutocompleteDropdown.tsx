@@ -1,7 +1,6 @@
 /**
  * AutocompleteDropdown — core autocomplete component.
  *
- * Key production patterns:
  *  - getOptionLabel={(option) => option?.display || ''}
  *  - isOptionEqualToValue={(option, value) => option?.id === value?.id}
  *  - renderOption uses option.id as key

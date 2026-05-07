@@ -1,9 +1,6 @@
 /**
  * api/prices.ts
  *
- * Mirrors the apiService pattern used in Confido's production frontend
- * (see web/src/components/Products/Pricing/api.ts).
- * Table name (product_prices) and column names (effective_at) match production.
  */
 import { supabase } from '../supabase'
 import { ProductPrice, ProductPriceFormValues } from '../types'

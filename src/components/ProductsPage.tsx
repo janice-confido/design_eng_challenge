@@ -5,9 +5,6 @@
  * monolith. One of the goals of the challenge is to identify opportunities
  * to decompose it into well-structured, reusable pieces.
  *
- * All three tables (Sellable Unit, Pricing, Retailer Pricing) use the
- * ConfidoTable component, which is a faithful port of the production
- * web/src/components/shared/ConfidoTable.
  */
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import {
@@ -311,7 +308,6 @@ export default function ProductsPage() {
       headerName: 'DC',
       valueFormatter: (v) => (v as string) || '—',
     },
-    // Effective At — formatted "MMM D, YYYY" matching production dayjs format
     {
       field: 'effective_at',
       headerName: 'Effective At',
@@ -473,7 +469,6 @@ export default function ProductsPage() {
                     </>
                   )}
 
-                  {/* Retailer Pricing — matches production: only "+ New Pricing", no Filter button */}
                   {tab === 'RETAILER_PRICING' && (
                     <Grid item>
                       <Button variant="contained" startIcon={<AddCircleOutlineIcon />}
@@ -568,7 +563,6 @@ export default function ProductsPage() {
                     size="medium"
                   />
                 </Box>
-                {/* Total Rows footer — mirrors DataGrid's built-in footer */}
                 <Box sx={{ px: 2, py: 1, borderTop: '1px solid rgba(224,224,224,1)', display: 'flex', justifyContent: 'flex-end' }}>
                   <Typography variant="body2" color="text.secondary">
                     Total Rows: {filteredRetailerPrices.length}

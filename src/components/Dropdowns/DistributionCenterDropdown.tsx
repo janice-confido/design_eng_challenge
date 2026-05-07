@@ -1,7 +1,6 @@
 /**
  * DistributionCenterDropdown — Autocomplete fetching DCs filtered by customer.
  *
- *   - Re-fetches when customerId changes (production uses key prop + hook)
  *   - Disabled when no customer is selected
  */
 import React from 'react'
@@ -39,7 +38,6 @@ export const DistributionCenterDropdown: React.FC<DistributionCenterDropdownProp
   return (
     <Autocomplete
       // Key on customerId — resets selection when customer changes
-      // mirrors: key={`pricing-detail-distribution-center-dropdown-${priceFields?.globalCustomer?.id}`}
       key={`dc-${customerId}`}
       options={distributionCenters}
       value={value}

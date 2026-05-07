@@ -1,6 +1,5 @@
 /**
  * EditableDetailDialog — view/edit/create/delete dialog shell.
- * Styled to match production: web/src/components/shared/EditableDetailDialog.tsx
  * - DialogTitle with absolute close button
  * - LinearProgress under title when loading
  * - DialogContent with dividers

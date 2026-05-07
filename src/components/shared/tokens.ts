@@ -1,5 +1,3 @@
-// Design tokens — mirrored from the Confido production design system.
-// Source: confido-repo/web/src/components/shared/tokens.ts
 
 export const colorScale = {
   red: {

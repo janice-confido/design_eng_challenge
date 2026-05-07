@@ -1,8 +1,6 @@
 /**
  * CustomerDropdown — Autocomplete fetching from the `customers` table.
  *
- *   - Uses useFetchCustomers hook (Supabase equivalent of production's axios call)
- *   - getOptionLabel, isOptionEqualToValue, loadingText match production exactly
  */
 import React from 'react'
 import { Autocomplete, TextField, TextFieldProps } from '@mui/material'

@@ -1,6 +1,5 @@
 /**
  * ProductFormDialog — create or edit a product.
- * Styled to match production modal patterns.
  */
 import React, { useEffect, useState } from 'react'
 import {

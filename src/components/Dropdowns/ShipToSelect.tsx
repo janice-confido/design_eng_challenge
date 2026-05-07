@@ -2,7 +2,6 @@
  * ShipToSelect — distributor dropdown filtered by planning group.
  *
  *
- * Production key behaviour:
  *  - When planningGroup is null: shows all distributors
  *  - When planningGroup is set: filters to only distributors that service
  *    that retailer (via planningGroupApportionedCustomers), and auto-selects

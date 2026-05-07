@@ -1,7 +1,6 @@
 /**
  * FilterChips — renders active filter values as deletable Chip components.
  *
- * Key production details:
  *  - Default MUI Chip (no size prop → medium)
  *  - maxWidth: 200px with text overflow ellipsis
  *  - Box wrapper with mr: 1, mb: 1 per chip

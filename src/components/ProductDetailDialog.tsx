@@ -1,11 +1,7 @@
 /**
  * ProductDetailDialog
  *
- * Adapted from production: web/src/components/Products/ProductDetailDialog.tsx
  *
- *  - Left column (md=4): Basic Information — editable name/SKU/family/sellable fields
- *  - Right column (md=8): Price History — mirrors PricingContentV2 (Stack buttons,
- *    table with pagination, PriceFormDialog for add/edit)
  *
  * Uses EditableDetailDialog shell (view/edit/delete modes + confirmations).
  */
@@ -260,12 +256,10 @@ export const ProductDetailDialog: React.FC<ProductDetailDialogProps> = ({
             )}
           </Grid>
 
-          {/* ── Right: Price History (mirrors PricingContentV2) ───────────── */}
           {!isNewItem && (
             <Grid item xs={12} md={8}>
               <Typography variant="h6" gutterBottom>Price History</Typography>
 
-              {/* Action row — mirrors PricingContentV2 Stack */}
               <Stack direction="row" spacing={2} sx={{ mb: 2 }}>
                 <Button
                   variant="contained"

@@ -1,7 +1,6 @@
 /**
  * PlanningGroupDropdown — Autocomplete fetching from the `planning_groups` table.
  *
- *   - Production calls GET /api/v0/planning_group/search_planning_groups
  *   - Challenge equivalent: useFetchPlanningGroups → Supabase query
  */
 import React from 'react'

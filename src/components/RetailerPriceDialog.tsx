@@ -4,7 +4,6 @@
  *   Row 1: PlanningGroupDropdown | ShipToSelect (auto-filters by planning group)
  *   Row 2: Case (text) | Price
  *
- * Key production patterns:
  *  - ShipToSelect filters distributors by planning group and auto-selects first
  *  - When planning group changes, Ship To resets automatically
  */
