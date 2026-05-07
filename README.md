@@ -142,10 +142,3 @@ apiService.deleteProductPrice(id)     // soft delete: sets is_deleted = true
 | `npm run lint` | ESLint |
 
 ---
-
-## Notes for Candidates
-
-- `src/components/` files are intentionally rough in places — that's the point.
-- The Supabase project is shared. **Do not delete or modify the seed products or prices.**
-  You can freely add new records; they won't affect other candidates.
-- `supabase/seed.sql` is for schema reference only — it has already been applied.

@@ -29,10 +29,12 @@ const createProductPrice = async (
   const { data, error } = await supabase
     .from('product_prices')
     .insert({
-      product_id:   productId,
-      amount:       parseFloat(values.amount),
-      effective_at: values.effective_at,
-      notes:        values.notes.trim() || null,
+      product_id:          productId,
+      amount:              parseFloat(values.amount),
+      effective_at:        values.effective_at,
+      customer:            values.customer?.display ?? null,
+      distribution_center: values.distribution_center?.display ?? null,
+      notes:               values.notes.trim() || null,
     })
     .select()
     .single()
@@ -49,9 +51,11 @@ const updateProductPrice = async (
   const { data, error } = await supabase
     .from('product_prices')
     .update({
-      amount:       parseFloat(values.amount),
-      effective_at: values.effective_at,
-      notes:        values.notes.trim() || null,
+      amount:              parseFloat(values.amount),
+      effective_at:        values.effective_at,
+      customer:            values.customer?.display ?? null,
+      distribution_center: values.distribution_center?.display ?? null,
+      notes:               values.notes.trim() || null,
     })
     .eq('id', id)
     .select()
@@ -63,7 +67,6 @@ const updateProductPrice = async (
 
 /**
  * Soft-delete a product price (sets is_deleted = true).
- * Mirrors production — allows recovery and maintains audit trail.
  */
 const deleteProductPrice = async (id: number): Promise<void> => {
   const { error } = await supabase

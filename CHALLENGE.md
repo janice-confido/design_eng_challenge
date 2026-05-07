@@ -1,5 +1,7 @@
 # Design Challenge Brief
 
+> **Important notice:** This challenge is hypothetical and for evaluation purposes only. While it references patterns and conventions from our codebase, it is a scoped-down simulation — not a snapshot of our production system. Your code will not be used, deployed, or incorporated into any Confido product or system in any way.
+
 ## Overview
 
 Design and implement an interface for a user to **view and manage a list of products and
@@ -7,8 +9,7 @@ their associated prices**. Prices change over time, so the UI must account for s
 price changes that take effect on a specific future date.
 
 This repo gives you a **working but rough starting point**: the Supabase backend is live,
-the core CRUD flows work, and the stack matches what we use in production. Your job is to
-make it noticeably better.
+the core CRUD flows work, and the stack matches what we use in production. 
 
 ---
 
@@ -46,25 +47,14 @@ past, current, and future.
 
 We want to see how you think about:
 
-- **Component design** — breaking a monolith into meaningful, reusable pieces
+- **Component design** — replacing MUI and building a design system with meaningful, reusable pieces
 - **State management** — loading, error, and optimistic update patterns
 - **UX** — at-a-glance affordances, empty states, confirmation flows, visual hierarchy
 - **Table design** — sorting, filtering, density, row actions
 - **Polish** — intentional details that make an interface feel considered
 
 You are free to replace or augment MUI components with your own. The theme in `src/theme.ts`
-mirrors our production palette — use it as a foundation or as reference.
-
----
-
-## Stretch Goals *(not required)*
-
-These will prompt a deeper conversation in the review session:
-
-- At-a-glance indicator on the product list showing current price and next scheduled change
-- Filtering and searching the product list
-- A dedicated price timeline view for a single product (visual, not just a table)
-- Bulk import / CSV upload UI surface (no need to parse CSV, but the UX matters)
+mirrors our color palette — use it as a foundation or as reference.
 
 ---
 
@@ -73,4 +63,17 @@ These will prompt a deeper conversation in the review session:
 A working fork of this repo with your changes. Be prepared to walk through your decisions
 in a 30-minute review session.
 
-**Time expectation: ~3–4 hours.** We care more about considered choices than completeness.
+**Time expectation: ~2 hours.** We care more about considered choices than completeness.
+
+---
+
+## Submission
+
+Create a branch named after yourself and today's date:
+
+```
+git checkout -b firstname-lastname-YYYY-MM-DD
+git push origin firstname-lastname-YYYY-MM-DD
+```
+
+For example: `jane-smith-2026-05-07`

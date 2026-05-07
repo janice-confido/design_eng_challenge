@@ -5,7 +5,7 @@
  * (see web/src/components/Products/api.ts in the main repo).
  *
  * Table name: products
- * Column names mirror production: sku, product_family, is_sellable, is_deleted
+
  */
 import { supabase } from '../supabase'
 import type { Product, ProductFormValues, ProductWithPricing } from '../types'
@@ -69,10 +69,13 @@ const createProduct = async (values: ProductFormValues): Promise<Product> => {
   const { data, error } = await supabase
     .from('products')
     .insert({
-      name:           values.name.trim(),
-      sku:            values.sku.trim().toUpperCase(),
-      product_family: values.product_family.trim() || null,
-      is_sellable:    values.is_sellable,
+      name:            values.name.trim(),
+      sku:             values.sku.trim().toUpperCase(),
+      upc:             values.upc.trim() || null,
+      product_family:  values.product_family.trim() || null,
+      is_sellable:     values.is_sellable,
+      is_pack:         values.is_pack,
+      lifecycle_stage: values.lifecycle_stage,
     })
     .select()
     .single()
@@ -86,10 +89,13 @@ const updateProduct = async (id: number, values: ProductFormValues): Promise<Pro
   const { data, error } = await supabase
     .from('products')
     .update({
-      name:           values.name.trim(),
-      sku:            values.sku.trim().toUpperCase(),
-      product_family: values.product_family.trim() || null,
-      is_sellable:    values.is_sellable,
+      name:            values.name.trim(),
+      sku:             values.sku.trim().toUpperCase(),
+      upc:             values.upc.trim() || null,
+      product_family:  values.product_family.trim() || null,
+      is_sellable:     values.is_sellable,
+      is_pack:         values.is_pack,
+      lifecycle_stage: values.lifecycle_stage,
     })
     .eq('id', id)
     .select()
@@ -112,10 +118,29 @@ const deleteProduct = async (id: number): Promise<void> => {
   if (error) throw error
 }
 
+const archiveProduct = async (id: number): Promise<void> => {
+  const { error } = await supabase
+    .from('products')
+    .update({ lifecycle_stage: 'Inactive' })
+    .eq('id', id)
+  if (error) throw error
+}
+
+/** Unarchive a product (restores lifecycle_stage to Active). */
+const unarchiveProduct = async (id: number): Promise<void> => {
+  const { error } = await supabase
+    .from('products')
+    .update({ lifecycle_stage: 'Active' })
+    .eq('id', id)
+  if (error) throw error
+}
+
 export const apiService = {
   getProducts,
   getProduct,
   createProduct,
   updateProduct,
   deleteProduct,
+  archiveProduct,
+  unarchiveProduct,
 }

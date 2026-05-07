@@ -1,177 +1,109 @@
 import { createTheme } from '@mui/material/styles'
+import { colorScale } from './components/shared/tokens'
 
-// Design tokens — mirrors the Confido production palette
-export const colorScale = {
-  green: {
-    100: '#E6EFEA',
-    200: '#C6DACE',
-    400: '#85AF97',
-    500: '#64997B',
-    600: '#527E65',
-    700: '#40634F',
-  },
-  blue: {
-    50: '#EEF1FC',
-    100: '#DCE3F9',
-    500: '#6F8FE6',
-    700: '#224CBF',
-  },
-  charcoal: {
-    50: '#F2F2F2',
-    100: '#EBEBEB',
-    200: '#DEDEDE',
-    300: '#D0D0D0',
-    400: '#C1C1C1',
-    500: '#A4A4A4',
-    600: '#888888',
-    700: '#6C6C6C',
-    800: '#4F4F4F',
-    900: '#313131',
-  },
-  red: {
-    100: '#FDE0E1',
-    500: '#D4353A',
-  },
-  orange: {
-    100: '#FFE6D5',
-    500: '#EE8236',
-  },
-}
-
-export const semanticColors = {
-  bg: {
-    beige: '#FAF9F7',
-    subtleDanger: '#FDE0E1',
-    subtleWarning: '#FFE6D5',
-  },
-  content: {
-    danger: '#A8161E',
-    warning: '#B84D00',
-  },
-}
-
-const BORDER_DEFAULT = colorScale.charcoal[200]
-const BORDER_FOCUS = colorScale.charcoal[500]
+// Re-export for any legacy imports
+export { colorScale }
 
 export const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: colorScale.green[500],
-      light: colorScale.green[200],
-      dark: colorScale.green[700],
+      main:         '#64997B', 
+      light:        '#CAE3D5',  
+      dark:         '#496F59',  
+      contrastText: '#ffffff',
     },
     secondary: {
-      main: colorScale.blue[500],
-      dark: colorScale.blue[700],
+      main:  '#6F8FE6',   
+      dark:  '#264085',  
+      light: '#96AEED',   
     },
     background: {
-      default: semanticColors.bg.beige,
+      default: '#FAF8F4',  
+      paper:   '#ffffff',
     },
     text: {
-      primary: '#000000',
-      secondary: '#474747',
-      disabled: '#9D9A9A',
+      primary:   '#000000',   
+      secondary: '#474747',  
+      disabled:  '#9D9A9A',   
     },
     error: {
-      main: '#D32F2F',
+      main:  '#D32F2F',
+      light: '#E57373',
+      dark:  '#A82424',
     },
     warning: {
-      main: '#ED6C02',
+      main:  '#ED6C02',
+      light: '#FD8F35',
+      dark:  '#DE6502',
+    },
+    info: {
+      main:  '#6F8FE6',
+      light: '#96AEED',
+      dark:  '#264085',
     },
     success: {
-      main: colorScale.green[500],
+      main:  '#64997B',
+      light: '#CAE3D5',
+      dark:  '#496F59',
     },
   },
   typography: {
     fontFamily: ['"Helvetica Neue"', 'Arial', 'sans-serif'].join(','),
-    h5: { fontWeight: 500 },
-    h6: { fontWeight: 500 },
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
           textTransform: 'none',
-          boxShadow: 'none',
-          fontWeight: 500,
-          borderRadius: 4,
-          '&:hover': { boxShadow: 'none' },
+          boxShadow:     'none',
+          fontWeight:    500,
         },
-        sizeSmall: { height: 32, fontSize: 13 },
-        sizeMedium: { height: 36, fontSize: 13 },
-      },
-    },
-    MuiOutlinedInput: {
-      styleOverrides: {
-        root: {
-          borderRadius: 4,
-          fontSize: 13,
-          backgroundColor: '#fff',
-          '& .MuiOutlinedInput-notchedOutline': { borderColor: BORDER_DEFAULT },
-          '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: BORDER_DEFAULT },
-          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: BORDER_FOCUS,
-            borderWidth: 1,
+        contained: {
+          '&:hover, &:active, &.Mui-focusVisible': {
+            boxShadow: 'none',
           },
-        },
-        sizeSmall: { height: 36 },
-      },
-    },
-    MuiInputBase: {
-      styleOverrides: { root: { fontSize: 13 } },
-    },
-    MuiTextField: {
-      defaultProps: { variant: 'outlined', size: 'small' },
-    },
-    MuiSelect: {
-      defaultProps: { variant: 'outlined', size: 'small' },
-    },
-    MuiTableHead: {
-      styleOverrides: {
-        root: {
-          '& .MuiTableCell-head': {
-            fontWeight: 600,
-            fontSize: 12,
-            color: colorScale.charcoal[600],
-            backgroundColor: colorScale.charcoal[50],
-            textTransform: 'uppercase',
-            letterSpacing: '0.4px',
-          },
-        },
-      },
-    },
-    MuiTableCell: {
-      styleOverrides: {
-        root: {
-          fontSize: 13,
-          borderColor: colorScale.charcoal[100],
         },
       },
     },
     MuiPaper: {
       styleOverrides: {
-        root: { borderRadius: 8 },
+        rounded: { borderRadius: 8 },
       },
     },
-    MuiChip: {
+    MuiDrawer: {
       styleOverrides: {
-        root: { borderRadius: 4, fontSize: 12 },
+        paper: { borderRadius: 0 },
+      },
+    },
+    MuiTextField: {
+      defaultProps: { variant: 'outlined' },
+    },
+    MuiSelect: {
+      defaultProps: { variant: 'outlined' },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#64997B',
+          },
+        },
       },
     },
     MuiDialog: {
       styleOverrides: {
-        paper: { borderRadius: 8 },
+        paper: { borderRadius: 8, padding: 0 },
       },
     },
-    MuiMenu: {
+    MuiDialogTitle: {
       styleOverrides: {
-        paper: {
-          borderRadius: 6,
-          border: `1px solid ${BORDER_DEFAULT}`,
-          boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
-          marginTop: 2,
-        },
+        root: { fontSize: 20, fontWeight: 500, paddingBottom: 8 },
+      },
+    },
+    MuiDialogContent: {
+      styleOverrides: {
+        root: { paddingTop: '16px !important' },
       },
     },
   },
