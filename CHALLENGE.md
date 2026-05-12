@@ -4,36 +4,79 @@
 
 ## Overview
 
-Design and implement an interface for a user to **view and manage a list of products and
-their associated prices**. Prices change over time, so the UI must account for scheduling
-price changes that take effect on a specific future date. Reference Figma Designs (TODO: 
-add link) for our visual design language and early-stage designs for this page. 
+Implement the **Products page** for a CPG brand's admin portal — a page where an admin
+manages their product catalog and associated pricing. The scope covers three tabs:
+**Sellable Unit**, **Pricing**, and **Retailer Pricing**.
 
-This repo gives you a **working but rough starting point**: the Supabase backend is live,
-the core CRUD flows work, and the stack matches what we use in production. 
+You have access to this companion [Figma file](https://www.figma.com/design/tj6G1x8TG7RdKHdMUvfVBH/Design-Engineer-Onsite?node-id=0-1&t=InDuW7BdkOwNQiqK-1) as a design and implementation reference. 
+Use it to understand our component patterns, visual language, and coding conventions. 
+Your goal is to build the Products page to closely match what exists there, with some
+liberty for UI improvements.
+
+This repo gives you a **working starting point**: the Supabase backend is live, the core
+CRUD flows work, and the stack mimics what we use in production.
 
 ---
 
 ## Data Model
 
-| Entity | Fields |
-|---|---|
-| **Product** | `name`, `sku` (unique), `product_family` (category / group), `is_sellable` |
-| **ProductPrice** | `amount`, `effective_at` (date), `notes`, linked to a product |
+### Products (`products`)
 
-Prices are stored in a table called `product_prices`. The `effective_at` column holds the
-date on which the price becomes active. A product can have any number of price records —
-past, current, and future.
+| Field | Type | Notes |
+|---|---|---|
+| `name` | text | Display name |
+| `sku` | text (unique) | Internal item number |
+| `upc` | text | Universal Product Code |
+| `product_family` | text | Category / group |
+| `is_sellable` | boolean | Purchasable by consumer |
+| `is_pack` | boolean | Composed of multiple units |
+| `lifecycle_stage` | text | Active, Inactive, Phase Out, etc. |
+
+### Product Prices (`product_prices`)
+
+| Field | Type | Notes |
+|---|---|---|
+| `product_id` | FK | Links to products |
+| `amount` | numeric | Price in dollars |
+| `effective_at` | date | Date the price becomes active |
+| `customer` | text | Distributor (e.g. UNFI, KeHE) |
+| `distribution_center` | text | Specific DC location |
+| `notes` | text | Optional context |
+
+### Retailer Prices (`retailer_prices`)
+
+| Field | Type | Notes |
+|---|---|---|
+| `planning_group` | text | Retail chain (e.g. Whole Foods) |
+| `customer` | text | Distributor serving that retailer |
+| `case_name` | text | Product / case being priced |
+| `price` | numeric | Price in dollars |
+
+> See `supabase/migrations.sql` for the full schema including lookup tables
+> (`customers`, `distribution_centers`, `planning_groups`).
 
 ---
 
 ## Core Requirements
 
-- View all products in a list
-- Add, edit, and delete individual products
-- Schedule future price changes per product (no limit on the number of changes)
-- Edit or cancel a scheduled price change before its `effective_at` date
-- View all price records for a single product (history + upcoming)
+### Sellable Unit tab
+- View all products in a paginated, searchable list
+- Columns: Product Name, Product Family, UPC, Is Pack, Is Sellable, Lifecycle Stage, Unit Price, Actions
+- Add, edit, and archive/unarchive individual products
+- Filter by product family and sellable status
+- Metric bar showing key completion stats (units without price, non-sellable units, etc.)
+
+### Pricing tab
+- View all product prices across the catalog (flat list: Product, Customer, DC, Effective At, Amount)
+- Create a new price (product + customer + DC + effective date + amount)
+- Edit or delete an existing price
+- Filter by product and effective date
+
+### Retailer Pricing tab
+- View retailer-customer-case price combinations
+- Create new retailer pricing (Planning Group → Ship To → Case → Price)
+- Ship To dropdown auto-filters to distributors that service the selected retailer
+- Edit or delete existing entries
 
 ---
 
@@ -48,14 +91,17 @@ past, current, and future.
 
 We want to see how you think about:
 
-- **Component design** — replacing MUI and building a design system with meaningful, reusable pieces
+- **Reference implementation** — use the [Figma file](https://www.figma.com/design/tj6G1x8TG7RdKHdMUvfVBH/Design-Engineer-Onsite?node-id=0-1&t=InDuW7BdkOwNQiqK-1) as the design reference; match the patterns, visual style,
+ and UX conventions you find there
+- **Component design** — decomposing the monolith `ProductsPage` into well-structured, reusable pieces
 - **State management** — loading, error, and optimistic update patterns
 - **UX** — at-a-glance affordances, empty states, confirmation flows, visual hierarchy
 - **Table design** — sorting, filtering, density, row actions
 - **Polish** — intentional details that make an interface feel considered
 
-You are free to replace or augment MUI components with your own. The theme in `src/theme.ts`
-mirrors our color palette — use it as a foundation or as reference.
+The theme in `src/theme.ts` matches the Confido color palette. The shared components in
+`src/components/shared/` and `src/components/Dropdowns/` follow the same patterns used
+in `confido-repo` — use them as a starting point.
 
 ---
 

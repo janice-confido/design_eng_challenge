@@ -258,6 +258,13 @@ export default function ProductsPage() {
       headerName: 'Unit Price',
       valueFormatter: (v) => v != null ? `$${(v as number).toFixed(2)}` : '—',
     },
+    // Custom Attributes — stub column matching production; shows "None" since
+    // the challenge schema does not include custom attribute assignments.
+    {
+      field: '__custom_attributes__',
+      headerName: 'Custom Attributes',
+      renderCell: () => <span style={{ color: '#888' }}>None</span>,
+    },
     {
       field: '__actions__',
       headerName: 'Actions',
@@ -282,18 +289,23 @@ export default function ProductsPage() {
 
   const pricingColumns: ConfidoTableColumn<ProductPriceWithProduct>[] = useMemo(() => [
     {
+      field: '__warn__',
+      headerName: '',
+      style: { width: 40 },
+      renderCell: () => null,
+    },
+    {
       field: 'product_name',
       headerName: 'Product',
       renderCell: ({ row }) => (
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <IconButton
             size="small"
-            title="View"
             sx={{ p: 0.5 }}
             onClick={() => { setEditingPrice(row); setPricingDialogOpen(true) }}
           >
             <LaunchIcon fontSize="small" />
-          </IconButton>{' '}
+          </IconButton>
           {row.product_name}
         </Box>
       ),
@@ -322,12 +334,30 @@ export default function ProductsPage() {
       headerName: 'Amount',
       valueFormatter: (v) => v != null ? `$${(v as number).toFixed(2)}` : '—',
     },
+    {
+      field: '__actions__',
+      headerName: 'Actions',
+      renderCell: ({ row }) => (
+        <Stack direction="row" spacing={1}>
+          <Tooltip title="Edit">
+            <IconButton size="small" onClick={() => { setEditingPrice(row); setPricingDialogOpen(true) }}>
+              <EditIcon fontSize="small" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Delete">
+            <IconButton size="small" color="error" onClick={() => handleDeletePrice(row.id as number)}>
+              <DeleteIcon fontSize="small" />
+            </IconButton>
+          </Tooltip>
+        </Stack>
+      ),
+    },
   // eslint-disable-next-line react-hooks/exhaustive-deps
   ], [products])
 
   const retailerColumns: ConfidoTableColumn<RetailerPrice>[] = useMemo(() => [
     { field: 'planning_group', headerName: 'Planning Group', style: { width: 200 } },
-    { field: 'customer',       headerName: 'Distributor',    style: { width: 200 }, valueFormatter: (v) => (v as string) || '—' },
+    { field: 'customer',       headerName: 'Customer',       style: { width: 200 }, valueFormatter: (v) => (v as string) || 'Direct' },
     { field: 'case_name',      headerName: 'Case',           style: { width: 200 } },
     { field: 'price', headerName: 'Price', style: { width: 150 }, valueFormatter: (v) => `$${(v as number).toFixed(2)}` },
     {
@@ -431,14 +461,13 @@ export default function ProductsPage() {
                   {tab === 'SELLABLE_UNIT' && (
                     <>
                       <Grid item>
-                        <Button variant="contained" startIcon={<AddCircleOutlineIcon />}
+                        <Button variant="contained" color="secondary" startIcon={<AddCircleOutlineIcon />}
                           onClick={() => { setEditingProduct(null); setFormDialogOpen(true) }}>
                           New Sellable Unit
                         </Button>
                       </Grid>
                       <Grid item><Button variant="outlined" disabled>Manage Product Families</Button></Grid>
                       <Grid item><Button variant="outlined" disabled>Manage COGS</Button></Grid>
-                      <Grid item><Button variant="outlined" disabled>Show Inactive</Button></Grid>
                       <Grid item>
                         <FilterModalButton<UnitFilters>
                           title="Filter Products" fields={unitFilterFields}
@@ -453,7 +482,7 @@ export default function ProductsPage() {
                   {tab === 'PRICING' && (
                     <>
                       <Grid item>
-                        <Button variant="contained" startIcon={<AddCircleOutlineIcon />}
+                        <Button variant="contained" color="secondary" startIcon={<AddCircleOutlineIcon />}
                           onClick={() => { setEditingPrice(null); setPricingDialogOpen(true) }}>
                           New Price
                         </Button>
@@ -471,7 +500,7 @@ export default function ProductsPage() {
 
                   {tab === 'RETAILER_PRICING' && (
                     <Grid item>
-                      <Button variant="contained" startIcon={<AddCircleOutlineIcon />}
+                      <Button variant="contained" color="secondary" startIcon={<AddCircleOutlineIcon />}
                         onClick={() => { setEditingRetailerPrice(null); setRetailerDialogOpen(true) }}>
                         New Pricing
                       </Button>
@@ -520,22 +549,15 @@ export default function ProductsPage() {
 
             {/* ══ PRICING ══════════════════════════════════════════ */}
             {tab === 'PRICING' && (
-              <>
-                <ConfidoTable<ProductPriceWithProduct>
-                  rows={filteredPrices}
-                  columns={pricingColumns}
-                  isLoading={pricesLoading}
-                  noRowsOverlay="No prices found."
-                  hasPagination
-                  paginationProps={{ pageSizeOptions: [10, 25, 50] }}
-                  size="medium"
-                />
-                <Box sx={{ px: 2, py: 1, borderTop: '1px solid', borderColor: 'divider' }}>
-                  <Typography variant="body2" color="text.secondary">
-                    Total Rows: {filteredPrices.length}
-                  </Typography>
-                </Box>
-              </>
+              <ConfidoTable<ProductPriceWithProduct>
+                rows={filteredPrices}
+                columns={pricingColumns}
+                isLoading={pricesLoading}
+                noRowsOverlay="No prices found."
+                hasPagination
+                paginationProps={{ pageSizeOptions: [10, 25, 50] }}
+                size="medium"
+              />
             )}
 
             {/* ══ RETAILER PRICING ═════════════════════════════════ */}

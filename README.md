@@ -1,6 +1,6 @@
 # Confido – Design Challenge
 
-A working starter app for the Confido design engineer take-home challenge.
+A working starter app for the Confido design engineer onsite challenge.
 Built with **Vite + React + TypeScript + MUI**, backed by **Supabase**.
 
 Read [`CHALLENGE.md`](./CHALLENGE.md) for the full brief.
@@ -61,7 +61,7 @@ App will be at `http://localhost:5173`.
 src/
 ├── main.tsx                      # Entry point — wraps app in MUI ThemeProvider
 ├── App.tsx                       # Root component + simple view routing (no router library)
-├── theme.ts                      # MUI theme — mirrors Confido production palette
+├── theme.ts                      # MUI theme — mirrors Confido palette
 ├── supabase.ts                   # Supabase client (reads VITE_SUPABASE_* env vars)
 ├── types.ts                      # Domain types: Product, ProductPrice, form value types
 ├── api/

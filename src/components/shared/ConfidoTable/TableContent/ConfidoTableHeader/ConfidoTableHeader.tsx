@@ -5,6 +5,7 @@ import { RowSelectionModel } from '../../RowSelection'
 import { InnerTableColumn } from '../../TableColumns'
 import { ValidRowModel } from '../../types'
 import { TABLE_CHECKBOX_FIELD } from '../../TableColumns/constants'
+import { colors } from '../../../tokens'
 
 interface ConfidoTableHeaderProps<R extends ValidRowModel> {
   columns: InnerTableColumn<R>[]
@@ -30,7 +31,7 @@ export const ConfidoTableHeader = <R extends ValidRowModel>({
         ) : (
           <TableCell key={col.field} sx={constructColumnStyle(col.style, col.pinned, true)}>
             {col.renderHeader?.({ field: col.field }) ?? (
-              <Typography sx={{ fontWeight: 500 }} component="span">
+              <Typography sx={{ fontWeight: 500, color: colors.charcoal600, fontSize: 13 }} component="span">
                 {col.headerName}
               </Typography>
             )}

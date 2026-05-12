@@ -1,6 +1,7 @@
 import { SxProps, Theme } from '@mui/material'
 import { ColumnPinnedState, InnerTableColumn } from '../TableColumns'
 import { ValidRowModel } from '../types'
+import { colors } from '../../tokens'
 
 export const constructColumnStyle =
   <R extends ValidRowModel>(
@@ -12,7 +13,7 @@ export const constructColumnStyle =
     let style: object = {
       width: styleProps?.width,
       textAlign: styleProps?.align,
-      bgcolor: styleProps?.backgroundColor ?? theme.palette.background.paper,
+      bgcolor: styleProps?.backgroundColor ?? (isHeader ? colors.charcoal50 : theme.palette.background.paper),
     }
     if (pinned === ColumnPinnedState.UNPINNED) return style
     style = { ...style, position: 'sticky', zIndex: isHeader ? 3 : 1 }
