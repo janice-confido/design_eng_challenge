@@ -87,24 +87,6 @@ CRUD flows work, and the stack mimics what we use in production.
 
 ---
 
-## What We're Looking For
-
-We want to see how you think about:
-
-- **Reference implementation** — use the [Figma file](https://www.figma.com/design/tj6G1x8TG7RdKHdMUvfVBH/Design-Engineer-Onsite?node-id=0-1&t=InDuW7BdkOwNQiqK-1) as the design reference; match the patterns, visual style,
- and UX conventions you find there
-- **Component design** — decomposing the monolith `ProductsPage` into well-structured, reusable pieces
-- **State management** — loading, error, and optimistic update patterns
-- **UX** — at-a-glance affordances, empty states, confirmation flows, visual hierarchy
-- **Table design** — sorting, filtering, density, row actions
-- **Polish** — intentional details that make an interface feel considered
-
-The theme in `src/theme.ts` matches the Confido color palette. The shared components in
-`src/components/shared/` and `src/components/Dropdowns/` follow the same patterns used
-in `confido-repo` — use them as a starting point.
-
----
-
 ## Deliverable
 
 A working fork of this repo with your changes. Be prepared to walk through your decisions
